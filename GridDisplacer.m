@@ -15,7 +15,7 @@ image1 = imread('image1.jpg');
 
 %block size (z * z cube)
 %GCM for 1920*1080 is 120px, 40px was a nice grid
-z = 60;
+z = 120;
 
 
 %of horizontal cubes
@@ -50,6 +50,9 @@ counti = 0;
 i2 = 1;
 j2 = 1;
 
+%Green color used is RGB(0,255,0)
+%iterates through the image and seperates the R G B values and constructs a
+%
 for i = 1:z:rows-1
    counti = counti + 1;
    countj = 0;
@@ -108,10 +111,12 @@ end
 [m1,n1] = size(xPreHash) ;
 [m2,n2] = size(yPreHash) ;
 
+rng(1);
 idx = randperm(n1) ;
 xHash = xPreHash;
 xHash(1,idx) = xPreHash(1,:);
 
+rng(1);
 idy = randperm(n2) ;
 yHash = yPreHash;
 yHash(1,idy) = yPreHash(1,:);
@@ -157,4 +162,16 @@ blockRGBe = cat(3, blockIR, blockIG, blockIB);
 
 figure('Name','Encrypted Image')
 imshow(blockRGBe);
+
+
+%unencrypt the image
+%params = cell();
+%params{1} = xHash;
+%params{2} = yHash;
+
+%unencImage = unenc(blockRGBe);
+
+
+
+
 

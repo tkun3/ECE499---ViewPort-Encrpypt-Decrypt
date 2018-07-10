@@ -1,0 +1,59 @@
+function [outImage] = extract(inputImage, rowCount, colCount)
+
+%Extract blocks from the grid
+%1)Takes in parameters of the original input image
+%2)rowCount is the number of horizontal pseudo pixels
+%3)colCount is the number of vertical pseudo pixels
+
+[rows columns depth] = size(inputImage);
+
+%Scan the image row by row pixels and recreate the cell contents in cells
+
+z = 1;
+
+colIncrements = round(rows/(2*colCount));
+rowIncrements = round(columns/(2*rowCount));
+
+
+tempOut = cell(rowCount,colCount);
+
+
+rowFirst = 1;
+colFirst = 1;
+
+
+%Find ranges for each pseudo pixel
+for i = rowIncrements:(rowIncrements*2):rows
+    
+
+
+    
+   for j = colIncrements:(colIncrements*2):columns
+       g = inputImage(rowIncrements),j,2);
+       
+       %find horizontal bounds
+       %find left bound
+       
+       %find right bound
+       
+       
+       
+       %find vertical bounds
+       %find top bound
+       
+       %find bottom bound
+       
+       
+       
+       
+   end
+end
+
+
+
+
+%output image is equal to some kind of cell
+outImage =  tempOut;
+
+end
+
