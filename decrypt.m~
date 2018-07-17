@@ -1,0 +1,12 @@
+%Decryption Function to reconstruct the original image
+%Random state is manually set though can be replaced with a key like system
+%Written by Takuma Pimlott
+%CENG 499
+
+function [outImage] = decrypt(inputImage,rowCount, colCount)
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+out
+
+end
+

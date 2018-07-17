@@ -17,9 +17,11 @@
 %crop(image1);
 
 %Extract Function Test
-image3 = imread('jay5by5.png');
+%image3 = imread('jay5by5.png');
 
-imageOut3 = extract(image3,5,5);
+image3 = imread('DarkImages/bg16by6.png');
+
+imageOut3 = extract(image3,6,6);
 
     figure
     imshow(imageOut3{15});
@@ -32,3 +34,13 @@ for i = 1:length(imageOut3)
     figure
     imshow(imageOut3{i});
 end
+
+
+%------------------- Add Normalizing step here ---------------
+
+%Test Reconstructing the original Image
+
+dImage = decrypt(imageOut3,6,6);
+
+figure
+imshow(dImage);
