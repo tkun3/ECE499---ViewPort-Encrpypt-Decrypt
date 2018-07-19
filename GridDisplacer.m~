@@ -44,7 +44,7 @@ blockB = cell(x,y);
 
 
 %grid Size
-pad = 18;
+pad = 1;
 
 %start from 1, increment by 40, and go up to the row - 1
 blockIR = zeros(x*(z+pad*2),y*(z+pad*2),'uint8');
@@ -166,9 +166,8 @@ end
 
 blockRGBe = cat(3, blockIR, blockIG, blockIB);
 
-%Get rid of remaining Black Border (Perhaps a Bug to investigate for
-%performance gains)
 blockRGBe = crop(blockRGBe);
+
 
 figure('Name','Encrypted Image')
 imshow(blockRGBe);

@@ -81,11 +81,11 @@ rect = [xmin ymin xmax-xmin ymax-ymin]
 
 outImage = imcrop(inputImage,rect);
 
-figure('Name','Input Image')
-imshow(inputImage);
+%figure('Name','Input Image')
+%imshow(inputImage);
 
-figure('Name','Output Image')
-imshow(outImage);
+%figure('Name','Output Image')
+%imshow(outImage);
 
 
 

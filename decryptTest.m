@@ -1,22 +1,34 @@
 
 %Extract the information
-%image3 = imread('DarkImages/bg16by6.png');
+image3 = imread('DarkImages/bg16by6.png');
+tThresStart=cputime;
+outThreshold = threshold(image3);
+tThresEnd=(cputime-tThresStart)/10;
+imageOut3 = extract(image3,6,6,outThreshold);
+
+%Read Image-----------------------------
+%image3 = imread('jgs/jgs1.png');
+%Find Image Green Threshold Value
+%outThreshold = threshold(image3);
+%Extract Data
 %imageOut3 = extract(image3,6,6);
 
-image3 = imread('jgs/jgs1.png');
-imageOut3 = extract(image3,6,6);
 
-image3 = imread('jgs/jgs.png');
-imageOut3 = extract(image3,10,10);
+%Read Image-----------------------------
+%image3 = imread('jgs/jgs.png');
+%Find Image Green Threshold Value
+%outThreshold = threshold(image3);
+%Extract Data
+%imageOut3 = extract(image3,10,10);
 
-image3 = imread('DecryptionTestImages/jay10by10.png');
-imageOut3 = extract(image3,10,10);
 
-%image3 = imread('TestPhotos/6by6Cropped.jpg');
-%imageOut3 = extract(image3,6,6);
+%Read Image-----------------------------
+%image3 = imread('DecryptionTestImages/jay10by10.png');
+%Find Image Green Threshold Value
+%outThreshold = threshold(image3);
+%Extract Data
+%imageOut3 = extract(image3,10,10,outThreshold);
 
-%image3 = imread('DarkImages/bg16by6.png');
-%imageOut3 = extract(image3,6,6);
 
 figure('Name','Encrypted Image')
 imshow(image3);
@@ -30,12 +42,12 @@ imshow(image3);
 %end
 
 
-%------------------- Add Normalizing step here ---------------
+%Normalize Data-----------------------------
 imageOut3 = normalization(imageOut3);
 
-%Test Reconstructing the original Image
+%Decrypt Image-----------------------------
 t1=cputime;
-dImage = decrypt(imageOut3,10,10);
+dImage = decrypt(imageOut3,6,6);
 tend1=(cputime-t1)/10;
 
 figure('Name','Decrypted Image')

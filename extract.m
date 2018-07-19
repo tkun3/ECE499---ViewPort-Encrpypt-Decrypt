@@ -3,7 +3,7 @@
 %Written by: Takuma Pimlott, James Wong
 %CENG 499
 
-function [outImage] = extract(inputImage, rowCount, colCount)
+function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 
 %Extract blocks from the grid
 %1)Takes in parameters of the original input image
@@ -11,6 +11,16 @@ function [outImage] = extract(inputImage, rowCount, colCount)
 %3)colCount is the number of vertical pseudo pixels
 
 [rows columns depth] = size(inputImage);
+
+%RGB Method
+%R = outThreshold(1);
+%G = outThreshold(2);
+%B = outThreshold(3);
+
+%LAB COLOR METHOD
+Aavg = outThreshold(1);
+Bavg = outThreshold(2);
+
 
 %Scan the image row by row pixels and recreate the cell contents in cells
 
@@ -45,7 +55,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find left bound
        dec = 1;
        X1 = i;
-       while inputImage(i-dec,j,2) < 254 %&& inputImage(i,j-firstIncrement,2) < 254 && inputImage(i,j+firstIncrement,2) < 254
+       while inputImage(i-dec,j,2) < G %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
            dec = dec + 1;
            X1 = i - dec;
        end
@@ -55,7 +65,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find right bound
        inc = 1;
        X2 = i;
-       while inputImage(i+inc,j,2) < 254 %&& inputImage(i,j-firstIncrement,2) < 254 && inputImage(i,j+firstIncrement,2) < 254
+       while inputImage(i+inc,j,2) < G %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
            inc = inc + 1;
            X2 = i + inc;
        end
@@ -70,7 +80,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find top bound
        dec = 1;
        Y1 = j;
-       while inputImage(i,j-dec,2) < 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
+       while inputImage(i,j-dec,2) < G %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
            dec = dec + 1;
            Y1 = j - dec;
        end
@@ -80,7 +90,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find bottom bound
        inc = 1;
        Y2 = j;
-       while inputImage(i,j+inc,2) < 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
+       while inputImage(i,j+inc,2) < G %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
            inc = inc + 1;
            Y2 = j + inc;
        end

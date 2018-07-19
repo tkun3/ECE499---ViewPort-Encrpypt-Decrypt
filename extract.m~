@@ -1,9 +1,9 @@
 %Function Used to extract the data inside of the green grid in order to
 %decode and process as necessary for the purpose of encryption / decryption
-%Written by: Takuma Pimlott
+%Written by: Takuma Pimlott, James Wong
 %CENG 499
 
-function [outImage] = extract(inputImage, rowCount, colCount)
+function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 
 %Extract blocks from the grid
 %1)Takes in parameters of the original input image
@@ -11,6 +11,8 @@ function [outImage] = extract(inputImage, rowCount, colCount)
 %3)colCount is the number of vertical pseudo pixels
 
 [rows columns depth] = size(inputImage);
+
+R 
 
 %Scan the image row by row pixels and recreate the cell contents in cells
 
@@ -32,6 +34,8 @@ rowFirst = 1;
 colFirst = 1;
 
 
+%Find the thresholding values to use
+
 
 
 %Find ranges for each pseudo pixel
@@ -43,7 +47,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find left bound
        dec = 1;
        X1 = i;
-       while inputImage(i-dec,j,2) < 254 %&& inputImage(i,j-firstIncrement,2) < 254 && inputImage(i,j+firstIncrement,2) < 254
+       while inputImage(i-dec,j,2) <= 254 %&& inputImage(i-dec,j,1) > 0 && inputImage(i-dec,j,3) > 0
            dec = dec + 1;
            X1 = i - dec;
        end
@@ -53,7 +57,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find right bound
        inc = 1;
        X2 = i;
-       while inputImage(i+inc,j,2) < 254 %&& inputImage(i,j-firstIncrement,2) < 254 && inputImage(i,j+firstIncrement,2) < 254
+       while inputImage(i+inc,j,2) <= 254 %&& inputImage(i,j-firstIncrement,2) < 254 && inputImage(i,j+firstIncrement,2) < 254
            inc = inc + 1;
            X2 = i + inc;
        end
@@ -68,7 +72,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find top bound
        dec = 1;
        Y1 = j;
-       while inputImage(i,j-dec,2) < 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
+       while inputImage(i,j-dec,2) <= 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
            dec = dec + 1;
            Y1 = j - dec;
        end
@@ -78,7 +82,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find bottom bound
        inc = 1;
        Y2 = j;
-       while inputImage(i,j+inc,2) < 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
+       while inputImage(i,j+inc,2) <= 254 %&& inputImage(i-firstIncrement,j,2) < 254 && inputImage(i+firstIncrement,j,2) < 254
            inc = inc + 1;
            Y2 = j + inc;
        end
