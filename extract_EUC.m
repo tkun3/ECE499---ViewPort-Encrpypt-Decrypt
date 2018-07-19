@@ -3,7 +3,7 @@
 %Written by: Takuma Pimlott, James Wong
 %CENG 499
 
-function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
+function [outImage] = extract_EUC(inputImage, rowCount, colCount, outThreshold)
 
 %Extract blocks from the grid
 %1)Takes in parameters of the original input image
@@ -62,13 +62,15 @@ for i = rowIncrements:(rowIncrements*2):rows
        lab1A = lab1(1,1,2) - Aavg;
        lab1B = lab1(1,1,3) - Bavg;
        lab1Distance = (lab1A^2 + lab1B^2)^.5;
-       while  lab1Distance > 0.05 %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
+       while  lab1Distance > 10 %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
+           dec = dec + 1;
+           X1 = i - dec;
+           
            lab1 = rgb2lab(inputImage(i-dec,j,:));
            lab1A = lab1(1,1,2) - Aavg;
            lab1B = lab1(1,1,3) - Bavg;
            lab1Distance = (lab1A^2 + lab1B^2)^.5;
-           dec = dec + 1;
-           X1 = i - dec;
+           
        end
        
        X1 = X1 + 1;
@@ -76,9 +78,20 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find right bound
        inc = 1;
        X2 = i;
-       while rgb2lab(inputImage(i+inc,j)) < G %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
+       
+       lab2 = rgb2lab(inputImage(i+inc,j,:));
+       lab2A = lab2(1,1,2) - Aavg;
+       lab2B = lab2(1,1,3) - Bavg;
+       lab2Distance = (lab2A^2 + lab2B^2)^.5;
+       
+       while lab2Distance > 10 %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
            inc = inc + 1;
            X2 = i + inc;
+           
+           lab2 = rgb2lab(inputImage(i+inc,j,:));
+           lab2A = lab2(1,1,2) - Aavg;
+           lab2B = lab2(1,1,3) - Bavg;
+           lab2Distance = (lab2A^2 + lab2B^2)^.5;
        end
        
        X2 = X2 - 1;
@@ -91,9 +104,20 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find top bound
        dec = 1;
        Y1 = j;
-       while rgb2lab(inputImage(i,j-dec)) < G %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
+       
+       lab3 = rgb2lab(inputImage(i,j-dec,:));
+       lab3A = lab3(1,1,2) - Aavg;
+       lab3B = lab3(1,1,3) - Bavg;
+       lab3Distance = (lab3A^2 + lab3B^2)^.5;
+       
+       while lab3Distance > 10 %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
            dec = dec + 1;
            Y1 = j - dec;
+           
+           lab3 = rgb2lab(inputImage(i,j-dec,:));
+           lab3A = lab3(1,1,2) - Aavg;
+           lab3B = lab3(1,1,3) - Bavg;
+           lab3Distance = (lab3A^2 + lab3B^2)^.5;
        end
        
        Y1 = Y1 + 1;
@@ -101,9 +125,21 @@ for i = rowIncrements:(rowIncrements*2):rows
        %find bottom bound
        inc = 1;
        Y2 = j;
-       while rgb2lab(inputImage(i,j+inc)) < G %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
+       
+       lab4 = rgb2lab(inputImage(i,j+inc,:));
+       lab4A = lab4(1,1,2) - Aavg;
+       lab4B = lab4(1,1,3) - Bavg;
+       lab4Distance = (lab4A^2 + lab4B^2)^.5;
+       
+       
+       while lab4Distance > 10 %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
            inc = inc + 1;
            Y2 = j + inc;
+           
+           lab4 = rgb2lab(inputImage(i,j+inc,:));
+           lab4A = lab4(1,1,2) - Aavg;
+           lab4B = lab4(1,1,3) - Bavg;
+           lab4Distance = (lab4A^2 + lab4B^2)^.5;
        end
        
        Y2 = Y2 - 1;

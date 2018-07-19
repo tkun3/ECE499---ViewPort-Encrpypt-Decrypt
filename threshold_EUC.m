@@ -33,9 +33,9 @@ AmeanVal = mean2(lab_GridA);
 BmeanVal = mean2(lab_GridB);
 
 
-tValues = [R G B];
+%tValues = [R G B];
 
-%tValues = [AmeanVal BmeanVal];
+tValues = [AmeanVal BmeanVal];
 
 outThreshold = tValues;
 

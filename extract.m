@@ -13,9 +13,9 @@ function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 [rows columns depth] = size(inputImage);
 
 %RGB Method
-%R = outThreshold(1);
-%G = outThreshold(2);
-%B = outThreshold(3);
+R = outThreshold(1);
+G = outThreshold(2);
+B = outThreshold(3);
 
 %LAB COLOR METHOD
 Aavg = outThreshold(1);
