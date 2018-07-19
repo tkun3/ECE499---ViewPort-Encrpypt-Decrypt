@@ -35,7 +35,9 @@ yHash = yPreHash;
 yHash(1,idy) = yPreHash(1,:);
 
 
-blockXY = reshape(inputImage, [x,y]);
+blockXY = reshape(inputImage.', [x,y]).';
+
+
 
 
 %Blocks Decrypted

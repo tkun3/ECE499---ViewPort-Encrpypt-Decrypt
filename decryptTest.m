@@ -1,6 +1,12 @@
 
 %Extract the information
-image3 = imread('DarkImages/bg16by6.png');
+%image3 = imread('DarkImages/bg16by6.png');
+%imageOut3 = extract(image3,6,6);
+
+%image3 = imread('jgs/jgs1.png');
+%imageOut3 = extract(image3,6,6);
+
+image3 = imread('TestPhotos/6by6Cropped.jpg');
 imageOut3 = extract(image3,6,6);
 
 figure('Name','Encrypted Image')

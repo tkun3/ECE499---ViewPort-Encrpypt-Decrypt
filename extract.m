@@ -32,6 +32,10 @@ rowFirst = 1;
 colFirst = 1;
 
 
+%Find the thresholding values to use
+
+
+
 %Find ranges for each pseudo pixel
 for i = rowIncrements:(rowIncrements*2):rows
     
@@ -45,6 +49,8 @@ for i = rowIncrements:(rowIncrements*2):rows
            dec = dec + 1;
            X1 = i - dec;
        end
+       
+       X1 = X1 + 1;
 
        %find right bound
        inc = 1;
@@ -53,6 +59,8 @@ for i = rowIncrements:(rowIncrements*2):rows
            inc = inc + 1;
            X2 = i + inc;
        end
+       
+       X2 = X2 - 1;
        
        %horizontal range will be from X1 to X2;
 
@@ -66,6 +74,8 @@ for i = rowIncrements:(rowIncrements*2):rows
            dec = dec + 1;
            Y1 = j - dec;
        end
+       
+       Y1 = Y1 + 1;
 
        %find bottom bound
        inc = 1;
@@ -74,6 +84,8 @@ for i = rowIncrements:(rowIncrements*2):rows
            inc = inc + 1;
            Y2 = j + inc;
        end
+       
+       Y2 = Y2 - 1;
        
        r = inputImage(X1:X2, Y1:Y2,1);
        g = inputImage(X1:X2, Y1:Y2,2);
