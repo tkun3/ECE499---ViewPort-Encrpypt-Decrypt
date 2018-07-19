@@ -1,6 +1,6 @@
 %Function Used to extract the data inside of the green grid in order to
 %decode and process as necessary for the purpose of encryption / decryption
-%Written by: Takuma Pimlott
+%Written by: Takuma Pimlott, James Wong
 %CENG 499
 
 function [outImage] = extract(inputImage, rowCount, colCount)

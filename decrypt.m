@@ -1,6 +1,6 @@
 %Decryption Function to reconstruct the original image
 %Random state is manually set though can be replaced with a key like system
-%Written by Takuma Pimlott
+%Written by Takuma Pimlott, James Wong
 %CENG 499
 
 function [outImage] = decrypt(inputImage,x, y)

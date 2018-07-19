@@ -4,7 +4,7 @@
 %   Overlay a grid on to an image by displacing the image rather than 
 %   overlaying directly over the pixels
 %Class: ECE 499
-%Written by: Takuma Pimlott
+%Written by: Takuma Pimlott, James Wong
 
 
 %load image
@@ -12,7 +12,7 @@
 image1 = imread('black1.png');
 image1 = imread('DarkImages/bg1.jpg');
 image1 = imread('jgs/jgs1.jpg');
-%image1 = imread('image2.jpg');
+image1 = imread('image2.jpg');
 %paddedArray = padarray(image,[150 150],'both');
 %imshow(paddedArray);
 
@@ -20,7 +20,8 @@ image1 = imread('jgs/jgs1.jpg');
 %GCM for 1920*1080 is 120px, 40px was a nice grid
 %z = 120;
 %z = 100;
-z = 105;
+%z = 105;
+z = 100;
 
 
 %of horizontal cubes

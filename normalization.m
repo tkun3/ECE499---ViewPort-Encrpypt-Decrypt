@@ -1,7 +1,7 @@
 %Function which normalizes the size of cells inside a cell array.
 %Especially important after extracting the image since some cells may be of 
 %differing size and prevent decryption. 
-%Written by: James Wong
+%Written by: James Wong, Takuma Pimlott
 function [outIm] = normalization(inputImage)
 
 % Get most common dimensions of cell contents
