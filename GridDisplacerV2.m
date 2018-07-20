@@ -12,7 +12,7 @@ tGridDisp=cputime;
 %image1 = imread('black1.png');
 %image1 = imread('DarkImages/bg1.jpg');
 %image1 = imread('jgs/jgs1.jpg');
-image1 = imread('image2.jpg');
+image1 = imread('image3.jpg');
 %paddedArray = padarray(image,[150 150],'both');
 %imshow(paddedArray);
 
@@ -21,7 +21,7 @@ image1 = imread('image2.jpg');
 %z = 120;
 %z = 100;
 %z = 105;
-z = 200;
+z = 80;
 
 
 %of horizontal cubes
@@ -119,8 +119,12 @@ end
 encryptedImagePre = cat(3, blockRe, blockGe, blockBe);
 encryptedImagePost = cell2mat(encryptedImagePre);
 
-figure('Name','Encrypted Image')
-imshow(encryptedImagePost)
+
+imwrite(encryptedImagePost,'output/1.png');
+
+%figure('Name','Encrypted Image')
+%imshow(encryptedImagePost)
+
 
 %Get rid of remaining Black Border (Perhaps a Bug to investigate for
 %performance gains)
@@ -132,7 +136,7 @@ imshow(encryptedImagePost)
 
 %unencImage = unenc(blockRGBe);
 
-tGridDispEnd=(cputime-tGridDisp)/10;
+tGridDispEnd=(cputime-tGridDisp);
 
 
 

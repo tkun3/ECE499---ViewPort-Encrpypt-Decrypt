@@ -48,6 +48,10 @@ colFirst = 1;
 Aavg = outThreshold(1);
 Bavg = outThreshold(2);
 
+%Set the Z pixel size ie pseudo pixel z*z size
+z = rows/(2*rowCount);
+step = round(z*0.8);
+
 
 %Find ranges for each pseudo pixel
 for i = rowIncrements:(rowIncrements*2):rows
@@ -56,7 +60,7 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find horizontal bounds
        %find left bound
-       dec = 1;
+       dec = step;
        X1 = i;
        lab1 = rgb2lab(inputImage(i-dec,j,:));
        lab1A = lab1(1,1,2) - Aavg;
@@ -76,7 +80,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        X1 = X1 + 1;
 
        %find right bound
-       inc = 1;
+       inc = step;
        X2 = i;
        
        lab2 = rgb2lab(inputImage(i+inc,j,:));
@@ -102,7 +106,7 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find vertical bounds
        %find top bound
-       dec = 1;
+       dec = step;
        Y1 = j;
        
        lab3 = rgb2lab(inputImage(i,j-dec,:));
@@ -123,7 +127,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        Y1 = Y1 + 1;
 
        %find bottom bound
-       inc = 1;
+       inc = step;
        Y2 = j;
        
        lab4 = rgb2lab(inputImage(i,j+inc,:));

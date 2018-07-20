@@ -37,17 +37,11 @@ t1=cputime;
 %imageOut3 = extract(image3,10,10,outThreshold)
 
 %Read Image-----------------------------
-%image3 = imread('output/1.png');
-%Find Image Green Threshold Value
-%outThreshold = threshold(image3);
-%Extract Data
-%imageOut3 = extract(image3,5,5,outThreshold);
-
-image3 = imread('TestPhotos/j5by5Low.jpg');
+image3 = imread('output/jay10by10.png');
 %Find Image Green Threshold Value
 outThreshold = threshold(image3);
 %Extract Data
-imageOut3 = extract(image3,5,5,outThreshold);
+imageOut3 = extract(image3,10,10,outThreshold);;
 
 %Read Image-----------------------------
 %image3 = imread('TestPhotos/j5by5.jpg');
@@ -74,8 +68,7 @@ imageOut3 = normalization(imageOut3);
 
 %Decrypt Image-----------------------------
 
-dImage = decrypt(imageOut3,5,5);
-imwrite(dImage,'outputDecry/1D.png');
+dImage = decrypt(imageOut3,10,10);
 decryptTestTime=(cputime-t1);
 
 %figure('Name','Decrypted Image')

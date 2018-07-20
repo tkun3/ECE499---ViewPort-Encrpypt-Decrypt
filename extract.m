@@ -12,9 +12,10 @@ function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 
 [rows columns depth] = size(inputImage);
 
+%Find the thresholding values to use
 %RGB Method
 R = outThreshold(1);
-G = outThreshold(2);
+G = outThreshold(2) -6;
 B = outThreshold(3);
 
 %LAB COLOR METHOD
@@ -41,8 +42,10 @@ firstIncrement = round((rows/rowCount)/2.5);
 rowFirst = 1;
 colFirst = 1;
 
+%Set the Z pixel size ie pseudo pixel z*z size
+z = rows/(2*rowCount);
+step = round(z*0.49);
 
-%Find the thresholding values to use
 
 
 
@@ -53,7 +56,7 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find horizontal bounds
        %find left bound
-       dec = 1;
+       dec = step;
        X1 = i;
        while inputImage(i-dec,j,2) < G %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
            dec = dec + 1;
@@ -63,7 +66,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        X1 = X1 + 1;
 
        %find right bound
-       inc = 1;
+       inc = step;
        X2 = i;
        while inputImage(i+inc,j,2) < G %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
            inc = inc + 1;
@@ -78,7 +81,7 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find vertical bounds
        %find top bound
-       dec = 1;
+       dec = step;
        Y1 = j;
        while inputImage(i,j-dec,2) < G %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
            dec = dec + 1;
@@ -88,7 +91,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        Y1 = Y1 + 1;
 
        %find bottom bound
-       inc = 1;
+       inc = step;
        Y2 = j;
        while inputImage(i,j+inc,2) < G %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
            inc = inc + 1;

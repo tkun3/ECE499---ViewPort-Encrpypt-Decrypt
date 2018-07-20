@@ -190,7 +190,7 @@ imshow(blockRGBe);
 
 %unencImage = unenc(blockRGBe);
 
-tGridDispEnd=(cputime-tGridDisp)/10;
+tGridDispEnd=(cputime-tGridDisp);
 
 
 

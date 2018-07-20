@@ -37,15 +37,22 @@ t1=cputime;
 %imageOut3 = extract_EUC(image3,10,10,outThreshold);
 
 %Read Image-----------------------------
-image3 = imread('TestPhotos/j5by5.jpg');
+image3 = imread('TestPhotos/j5by5Low.jpg');
 %Find Image Green Threshold Value
 outThreshold = threshold_EUC(image3);
 %Extract Data
 imageOut3 = extract_EUC(image3,5,5,outThreshold);
 
+%Read Image-----------------------------
+%image3 = imread('output/1.png');
+%Find Image Green Threshold Value
+%outThreshold = threshold(image3);
+%Extract Data
+%imageOut3 = extract(image3,5,5,outThreshold);
 
-figure('Name','Encrypted Image')
-imshow(image3);
+
+%figure('Name','Encrypted Image')
+%imshow(image3);
 
 %figure
 %imshow(imageOut3{15});
@@ -62,7 +69,8 @@ imageOut3 = normalization(imageOut3);
 %Decrypt Image-----------------------------
 
 dImage = decrypt(imageOut3,5,5);
-tend1=(cputime-t1)/10;
+imwrite(dImage,'outputDecry/1D.png');
+EUCEndTime=(cputime-t1);
 
-figure('Name','Decrypted Image')
-imshow(dImage);
+%figure('Name','Decrypted Image')
+%imshow(dImage);
