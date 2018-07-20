@@ -46,55 +46,34 @@ blockB = cell(x,y);
 %grid Size
 pad = 18;
 
-%start from 1, increment by 40, and go up to the row - 1
-blockIR = zeros(x*(z+(pad*2)),y*(z+(pad*2)),'uint8');
-blockIG = zeros(x*(z+(pad*2)),y*(z+(pad*2)),'uint8');
-blockIB = zeros(x*(z+(pad*2)),y*(z+(pad*2)),'uint8');
-
-
-
-
-
 %Green color used is RGB(0,255,0)
 %iterates through the image and seperates the R G B values and constructs a
 %
 
 counti = 0;
-i2 = 1;
-j2 = 1;
-
 for i = 1:z:rows-1
    counti = counti + 1;
    countj = 0;
-   j2 = 1;
    for j = 1:z:columns-1
         countj = countj + 1;
  
         o = image1(i:i+z-1,j:j+z-1,1);
         blockR{counti,countj} = padarray(o,[pad pad],0,'both');
-        blockIR(i2:i2+z+pad+pad-1,j2:j2+z+pad+pad-1) = blockR{counti,countj};
         
         o = image1(i:i+z-1,j:j+z-1,2);
         blockG{counti,countj} = padarray(o,[pad pad],255,'both');
-        blockIG(i2:i2+z+pad+pad-1,j2:j2+z+pad+pad-1) = blockG{counti,countj};
         
         o = image1(i:i+z-1,j:j+z-1,3);
         blockB{counti,countj} = padarray(o,[pad pad],0,'both');
-        blockIB(i2:i2+z+pad+pad-1,j2:j2+z+pad+pad-1) = blockB{counti,countj};
-        
-        j2 = j2 + z - 1 + pad + pad;
    end
-  
-   i2 = i2 + z - 1 + pad + pad;
-   
+     
 end
 
-blockRGBo = cat(3, blockIR, blockIG, blockIB);
-
-
+blockRGB99 = cat(3, blockR, blockG, blockB);
+outputConverted = cell2mat(blockRGB99);
 
 figure('Name','Original Image')
-imshow(blockRGBo);
+imshow(outputConverted);
 
 
 %Encrpyt the image
@@ -146,6 +125,12 @@ for i = 1:1:x
   
 end
 
+blockRGB88 = cat(3, blockRe, blockG, blockB);
+outputConverted = cell2mat(blockRGB88);
+
+figure('Name','Original Image')
+imshow(outputConverted)
+
 
 %Print the encrypted image
 counti = 0;
@@ -169,9 +154,9 @@ for i = 1:z:rows-1
    end
    i2 = i2 + z - 1 + pad + pad;
 end
-%blockIR = padarray(blockIR,[pad pad],0,'both');
-%blockIG = padarray(blockIG,[pad pad],255,'both');
-%blockIB = padarray(blockIB,[pad pad],0,'both');
+blockIR = padarray(blockIR,[pad pad],0,'both');
+blockIG = padarray(blockIG,[pad pad],255,'both');
+blockIB = padarray(blockIB,[pad pad],0,'both');
 
 blockRGBe = cat(3, blockIR, blockIG, blockIB);
 
