@@ -43,11 +43,17 @@ t1=cputime;
 %Extract Data
 %imageOut3 = extract(image3,5,5,outThreshold);
 
-image3 = imread('TestPhotos/j5by5Low.jpg');
+image3 = imread('TestPhotos/apple8by8UNC.jpg');
+image3 = crop(image3);
+%image3 = imread('TestPhotos/railroad27by27.jpg');
+%image3 = imgaussfilt(image3,0.3);
+%image3 = imread('output/1.png');
 %Find Image Green Threshold Value
+
 outThreshold = threshold(image3);
+%image3 = imsharpen(image3);
 %Extract Data
-imageOut3 = extract(image3,5,5,outThreshold);
+imageOut3 = extract(image3,8,8,outThreshold);
 
 %Read Image-----------------------------
 %image3 = imread('TestPhotos/j5by5.jpg');
@@ -74,7 +80,7 @@ imageOut3 = normalization(imageOut3);
 
 %Decrypt Image-----------------------------
 
-dImage = decrypt(imageOut3,5,5);
+dImage = decrypt(imageOut3,8,8);
 imwrite(dImage,'outputDecry/1D.png');
 decryptTestTime=(cputime-t1);
 

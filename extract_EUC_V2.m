@@ -19,7 +19,7 @@ function [outImage] = extract_EUC(inputImage, rowCount, colCount, outThreshold)
 
 %Scan the image row by row pixels and recreate the cell contents in cells
 
-z = 20;
+z = 1;
 
 %colIncrements = round(rows/(2*colCount));
 %rowIncrements = round(columns/(2*rowCount));
@@ -52,7 +52,12 @@ Bavg = outThreshold(2);
 z = rows/(2*rowCount);
 step = round(z*0.8);
 
-EUC_Range = 190;
+AvgStepL = step;
+AvgStepR = step;
+AvgStepT = step;
+AvgStepB = step;
+
+EUCDistance = 20;
 
 %Find ranges for each pseudo pixel
 for i = rowIncrements:(rowIncrements*2):rows
@@ -61,13 +66,14 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find horizontal bounds
        %find left bound
-       dec = step;
+       dec = AvgStepL;
+       AvgStepL = 0;
        X1 = i;
        lab1 = rgb2lab(inputImage(i-dec,j,:));
        lab1A = lab1(1,1,2) - Aavg;
        lab1B = lab1(1,1,3) - Bavg;
        lab1Distance = (lab1A^2 + lab1B^2)^.5;
-       while  lab1Distance > EUC_Range %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
+       while  lab1Distance > EUCDistance %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
            dec = dec + 1;
            X1 = i - dec;
            
@@ -76,12 +82,17 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab1B = lab1(1,1,3) - Bavg;
            lab1Distance = (lab1A^2 + lab1B^2)^.5;
            
+           AvgStepL = AvgStepL + 1;
+           
        end
+       
+       AvgStepL = AvgStepL + step -2; 
        
        X1 = X1 + 1;
 
        %find right bound
-       inc = step;
+       inc = AvgStepR;
+       AvgStepR = 0;
        X2 = i;
        
        lab2 = rgb2lab(inputImage(i+inc,j,:));
@@ -89,7 +100,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        lab2B = lab2(1,1,3) - Bavg;
        lab2Distance = (lab2A^2 + lab2B^2)^.5;
        
-       while lab2Distance > EUC_Range %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
+       while lab2Distance > EUCDistance %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
            inc = inc + 1;
            X2 = i + inc;
            
@@ -97,8 +108,10 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab2A = lab2(1,1,2) - Aavg;
            lab2B = lab2(1,1,3) - Bavg;
            lab2Distance = (lab2A^2 + lab2B^2)^.5;
+           
+           AvgStepR = AvgStepR + 1;
        end
-       
+       AvgStepR = AvgStepR + step -2;
        X2 = X2 - 1;
        
        %horizontal range will be from X1 to X2;
@@ -107,7 +120,8 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find vertical bounds
        %find top bound
-       dec = step;
+       dec = AvgStepT;
+       AvgStepT = 0;
        Y1 = j;
        
        lab3 = rgb2lab(inputImage(i,j-dec,:));
@@ -115,7 +129,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        lab3B = lab3(1,1,3) - Bavg;
        lab3Distance = (lab3A^2 + lab3B^2)^.5;
        
-       while lab3Distance > EUC_Range %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
+       while lab3Distance > EUCDistance %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
            dec = dec + 1;
            Y1 = j - dec;
            
@@ -123,12 +137,15 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab3A = lab3(1,1,2) - Aavg;
            lab3B = lab3(1,1,3) - Bavg;
            lab3Distance = (lab3A^2 + lab3B^2)^.5;
+           
+           AvgStepT = AvgStepT + 1;
        end
-       
+       AvgStepT = AvgStepT + step -2;
        Y1 = Y1 + 1;
 
        %find bottom bound
-       inc = step;
+       inc = AvgStepB;
+       AvgStepB = 0;
        Y2 = j;
        
        lab4 = rgb2lab(inputImage(i,j+inc,:));
@@ -137,7 +154,7 @@ for i = rowIncrements:(rowIncrements*2):rows
        lab4Distance = (lab4A^2 + lab4B^2)^.5;
        
        
-       while lab4Distance > EUC_Range %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
+       while lab4Distance > EUCDistance %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
            inc = inc + 1;
            Y2 = j + inc;
            
@@ -145,8 +162,11 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab4A = lab4(1,1,2) - Aavg;
            lab4B = lab4(1,1,3) - Bavg;
            lab4Distance = (lab4A^2 + lab4B^2)^.5;
+           
+           AvgStepB = AvgStepB + 1;
        end
        
+       AvgStepB = AvgStepB + step -2;
        Y2 = Y2 - 1;
        
        r = inputImage(X1:X2, Y1:Y2,1);

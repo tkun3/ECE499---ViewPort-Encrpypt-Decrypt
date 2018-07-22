@@ -11,10 +11,6 @@ xmax = 0;
 ymin = 0;
 ymax = 0;
 
-R = 60;
-G = 150;
-B = 60;
-
 
 %find left x
 for j = 1:columns - 1
@@ -55,7 +51,7 @@ for i = 1:rows-1
     g = inputImage(i,round(columns/2),2);
     b = inputImage(i,round(columns/2),3);
     
-    if(r <= R && g >= G && b <= B)
+    if(r <= 50 && g >= 200 && b <= 50)
         ymin = i;
         break
     end

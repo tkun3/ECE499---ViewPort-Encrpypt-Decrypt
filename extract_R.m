@@ -15,7 +15,7 @@ function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 %Find the thresholding values to use
 %RGB Method
 R = outThreshold(1);
-G = outThreshold(2) - 10;
+G = outThreshold(2) - 6;
 B = outThreshold(3);
 
 %LAB COLOR METHOD
@@ -44,9 +44,12 @@ colFirst = 1;
 
 %Set the Z pixel size ie pseudo pixel z*z size
 z = rows/(2*rowCount);
-step = round(z*0.48);
+step = round(z*0.49);
 
-AverageStep = 0;
+AvgStepL = step;
+AvgStepR = step;
+AvgStepT = step;
+AvgStepB = step;
 
 
 
@@ -58,23 +61,31 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find horizontal bounds
        %find left bound
-       dec = step;
+       
+
+       
+       dec = AvgStepL;
+       AvgStepL = 0;
        X1 = i;
        while inputImage(i-dec,j,2) < G %&& inputImage(i-dec,j,1) > R && inputImage(i-dec,j,3) > B
            dec = dec + 1;
            X1 = i - dec;
+           AvgStepL = AvgStepL + 1;
        end
+       AvgStepL = AvgStepL + step - 1; 
        
        X1 = X1 + 1;
 
        %find right bound
-       inc = step;
+       inc = AvgStepR;
+       AvgStepR = 0;
        X2 = i;
        while inputImage(i+inc,j,2) < G %&& inputImage(i+inc,j,1) > R && inputImage(i+inc,j,3) > B
            inc = inc + 1;
            X2 = i + inc;
+           AvgStepR = AvgStepR + 1;
        end
-       
+       AvgStepR = AvgStepR + step - 1;
        X2 = X2 - 1;
        
        %horizontal range will be from X1 to X2;
@@ -83,23 +94,27 @@ for i = rowIncrements:(rowIncrements*2):rows
 
        %find vertical bounds
        %find top bound
-       dec = step;
+       dec = AvgStepT;
+       AvgStepT = 0;
        Y1 = j;
        while inputImage(i,j-dec,2) < G %&& inputImage(i,j-dec,1) > R && inputImage(i,j-dec,3) > B
            dec = dec + 1;
            Y1 = j - dec;
+           AvgStepT = AvgStepT + 1;
        end
-       
+       AvgStepT = AvgStepT + step - 1;
        Y1 = Y1 + 1;
 
        %find bottom bound
-       inc = step;
+       inc = AvgStepB;
+       AvgStepB = 0;
        Y2 = j;
        while inputImage(i,j+inc,2) < G %&& inputImage(i,j+inc,1) > R && inputImage(i,j+inc,3) > B
            inc = inc + 1;
            Y2 = j + inc;
+           AvgStepB = AvgStepB + 1;
        end
-       
+       AvgStepB = AvgStepB + step - 1;
        Y2 = Y2 - 1;
        
        r = inputImage(X1:X2, Y1:Y2,1);
