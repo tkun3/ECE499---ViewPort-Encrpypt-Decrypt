@@ -70,5 +70,5 @@ boundaries = bwboundaries(BW_filled);
 
 for k=1:1
    b = boundaries{k};
-   plot(b(:,2),b(:,1),'g','LineWidth',3);
+   plot(b(:,2),b(:,1),'r','LineWidth',3);
 end
