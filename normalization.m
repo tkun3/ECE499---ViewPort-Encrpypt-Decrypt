@@ -15,6 +15,9 @@ normCell = cell(1,y);
 
 for i=1:1:y
     cellImg = cell2mat(inputImage(i));
+    if isempty(cellImg)
+        cellImg = zeros(comX, comY, 3);
+    end
     [m, n, ~] = size(cellImg);
     if(m ~= comX)
         if(m > comX)
