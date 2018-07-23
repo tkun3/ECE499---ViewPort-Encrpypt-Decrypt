@@ -15,7 +15,7 @@ function [outImage] = extract(inputImage, rowCount, colCount, outThreshold)
 %Find the thresholding values to use
 %RGB Method
 R = outThreshold(1);
-G = outThreshold(2) - 15;
+G = outThreshold(2) - 1;
 B = outThreshold(3);
 
 %LAB COLOR METHOD
@@ -44,10 +44,9 @@ colFirst = 1;
 
 %Set the Z pixel size ie pseudo pixel z*z size
 z = rows/(2*rowCount);
-step = round(z*0.4);
+step = round(z*0.48);
 
 AverageStep = 0;
-bias = 4;
 
 
 
@@ -66,7 +65,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            X1 = i - dec;
        end
        
-       X1 = X1 + bias;
+       X1 = X1 + 1;
 
        %find right bound
        inc = step;
@@ -76,7 +75,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            X2 = i + inc;
        end
        
-       X2 = X2 - bias;
+       X2 = X2 - 1;
        
        %horizontal range will be from X1 to X2;
 
@@ -91,7 +90,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            Y1 = j - dec;
        end
        
-       Y1 = Y1 + bias;
+       Y1 = Y1 + 1;
 
        %find bottom bound
        inc = step;
@@ -101,7 +100,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            Y2 = j + inc;
        end
        
-       Y2 = Y2 - bias;
+       Y2 = Y2 - 1;
        
        r = inputImage(X1:X2, Y1:Y2,1);
        g = inputImage(X1:X2, Y1:Y2,2);

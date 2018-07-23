@@ -11,17 +11,17 @@ xmax = 0;
 ymin = 0;
 ymax = 0;
 
-R = 60;
-G = 150;
-B = 60;
+R = 120;
+G = 220;
+B = 120;
 
 
 %find left x
 for j = 1:columns - 1
     
-    r = inputImage(round(rows/2),j,1);
-    g = inputImage(round(rows/2),j,2);
-    b = inputImage(round(rows/2),j,3);
+    r = inputImage(round(rows/3.7),j,1);
+    g = inputImage(round(rows/3.7),j,2);
+    b = inputImage(round(rows/3.7),j,3);
     
     if(r <= R && g >= G && b <= B)
         xmin = j;
@@ -71,7 +71,7 @@ for i = rows:-1:1
     g = inputImage(i,round(columns/2),2);
     b = inputImage(i,round(columns/2),3);
     
-    if(r <= 50 && g >= 200 && b <= 50)
+    if(r <= R && g >= G && b <= B)
         ymax = i;
         break
     end
@@ -85,11 +85,11 @@ rect = [xmin ymin xmax-xmin ymax-ymin]
 
 outImage = imcrop(inputImage,rect);
 
-figure('Name','Input Image')
-imshow(inputImage);
+%figure('Name','Input Image')
+%imshow(inputImage);
 
-figure('Name','Output Image')
-imshow(outImage);
+%figure('Name','Output Image')
+%imshow(outImage);
 
 
 

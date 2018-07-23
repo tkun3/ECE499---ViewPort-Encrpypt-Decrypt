@@ -14,6 +14,7 @@ tGridDisp=cputime;
 %image1 = imread('jgs/jgs1.jpg');
 %image1 = imread('image4.jpg');
 image1 = imread('apple.jpg');
+%image1 = rgb2gray(image1);
 %paddedArray = padarray(image,[150 150],'both');
 %imshow(paddedArray);
 
@@ -22,7 +23,7 @@ image1 = imread('apple.jpg');
 %z = 120;
 %z = 100;
 %z = 105;
-z = 40;
+z = 5;
 
 
 %of horizontal cubes
@@ -44,7 +45,7 @@ blockB = cell(x,y);
 %------Break image down into z*z blocks with x*y size matrix------
 
 %grid Size
-pad = 12;
+pad = 2;
 
 %Pad each pseudoPixel of the image
 

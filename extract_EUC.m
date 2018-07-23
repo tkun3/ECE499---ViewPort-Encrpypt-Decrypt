@@ -50,9 +50,10 @@ Bavg = outThreshold(2);
 
 %Set the Z pixel size ie pseudo pixel z*z size
 z = rows/(2*rowCount);
-step = round(z*0.8);
+step = round(z*0.6);
 
-EUC_Range = 190;
+EUC_Range = 20;
+bias = 4;
 
 %Find ranges for each pseudo pixel
 for i = rowIncrements:(rowIncrements*2):rows
@@ -78,7 +79,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            
        end
        
-       X1 = X1 + 1;
+       X1 = X1 + bias;
 
        %find right bound
        inc = step;
@@ -99,7 +100,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab2Distance = (lab2A^2 + lab2B^2)^.5;
        end
        
-       X2 = X2 - 1;
+       X2 = X2 - bias;
        
        %horizontal range will be from X1 to X2;
 
@@ -125,7 +126,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab3Distance = (lab3A^2 + lab3B^2)^.5;
        end
        
-       Y1 = Y1 + 1;
+       Y1 = Y1 + bias;
 
        %find bottom bound
        inc = step;
@@ -147,7 +148,7 @@ for i = rowIncrements:(rowIncrements*2):rows
            lab4Distance = (lab4A^2 + lab4B^2)^.5;
        end
        
-       Y2 = Y2 - 1;
+       Y2 = Y2 - bias;
        
        r = inputImage(X1:X2, Y1:Y2,1);
        g = inputImage(X1:X2, Y1:Y2,2);
