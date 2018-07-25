@@ -44,9 +44,22 @@ t1=cputime;
 %imageOut3 = extract(image3,5,5,outThreshold);
 
 %image3 = imread('TestPhotos/appleFS.jpg');
-image3 = imread('DecryptionTestImages/j5by5.png');
+%image3 = imread('DecryptionTestImages/j5by5.png');
+%good
 image3 = imread('TestPhotos/appleGrey8by8Crop.jpg');
+%good
+image3 = imread('TestPhotos/apple8by8.jpg');
+%good
+image3 = imread('TestPhotos/apple16by16.png');
+%good
+image3 = imread('TestPhotos/apple32by321.png');
 
+%good
+%variance 35 - 40
+image3 = imread('TestPhotos/railroad27by27.jpg');
+
+x = 27;
+y = 27;
 
 %image3 = imread('output/1.png');
 
@@ -68,7 +81,7 @@ image3 = imread('TestPhotos/appleGrey8by8Crop.jpg');
 %imshow(image3);
 %Extract Data
 %imageOut3 = extract_R(image3,5,5,outThreshold);
-imageOut3 = extract_B(image3,8,8);
+imageOut3 = extract_B(image3,x,y);
 
 %outThreshold = threshold(image3);
 %Extract Data
@@ -99,7 +112,7 @@ imageOut3 = normalization(imageOut3);
 
 %Decrypt Image-----------------------------
 
-dImage = decrypt(imageOut3,8,8);
+dImage = decrypt(imageOut3,x,y);
 imwrite(dImage,'outputDecry/1D.png');
 decryptTestTime=(cputime-t1);
 

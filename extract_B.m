@@ -9,7 +9,7 @@ centerBoxIncrement = round(rows/(2*rowCount));
 
 bias = 1;
 step = 1;
-variance = 15;
+variance = 40;
 
 %Currently configured for cube images only
 rowScan = cell(1,rowCount);
@@ -70,7 +70,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            X1 = j;
            while abs(double(inputImage(i,j-dec,2))-sample) < variance 
                dec = dec + 1;
-               X1 = X1 - dec;
+               X1 = X1 - 1;
            end
 
            X1 = X1 - 2;
@@ -80,7 +80,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            X2 = j;
            while abs(double(inputImage(i,j+inc,2)) - sample) < variance 
                inc = inc + 1;
-               X2 = X2 + inc;
+               X2 = X2 + 1;
            end
 
            X2 = X2 + 2;
@@ -112,7 +112,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            firstL = firstL + 1;
        end
        
-       firstL = firstL - 1;
+       firstL = firstL + 1;
       
        %Last BOTTOM
        sample = double(inputImage(rows,i,2));
@@ -139,7 +139,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            X1 = j;
            while abs(double(inputImage(j-dec,i,2))-sample) < variance 
                dec = dec + 1;
-               X1 = X1 - dec;
+               X1 = X1 - 1;
            end
 
            X1 = X1 - 2;
@@ -149,7 +149,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            X2 = j;
            while abs(double(inputImage(j+inc,i,2)) - sample) < variance 
                inc = inc + 1;
-               X2 = X2 + inc;
+               X2 = X2 + 1;
            end
 
            X2 = X2 + 2;
