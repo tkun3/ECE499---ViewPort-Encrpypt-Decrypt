@@ -1,0 +1,67 @@
+function [outImage] = extract_B(inputImage, rowCount, colCount, outThreshold)
+
+[rows cols depth] = size(inputImage);
+
+rowIncrement = round(cols/colCount);
+colIncrement = rowIncrement;
+
+centerBoxIncrement = round(rows/(2*rowCount));
+
+bias = 0;
+step = 1;
+variance = 5;
+columnLocations = cell((colCount-1)*rowCount);
+rowColumnLocations = cell(d;
+
+%First grid column (left and right)
+
+for i = centerBoxIncrement:(centerBoxIncrement*2):rowIncrement*(rowCount-1)
+    
+    for j = colIncrement:colIncrement:colIncrement*(rowCount-1)
+    
+       %find left bound
+       sample = inputImage(i,j);
+       dec = step;
+       X1 = j;
+       while abs(inputImage(i,j-dec,2)-sample) < variance 
+           dec = dec + 1;
+           X1 = X1 - dec;
+       end
+       
+       X1 = X1 + bias;
+
+       %find right bound
+       inc = step;
+       X2 = j;
+       while abs(inputImage(i,j+inc,2) - sample) < variance 
+           inc = inc + 1;
+           X2 = X2 + inc;
+       end
+       
+       X2 = X2 - bias;
+ 
+
+       
+
+    
+    end
+    
+    
+end
+
+
+
+
+
+
+
+
+
+
+
+
+outImage = inputImage;
+
+
+end
+

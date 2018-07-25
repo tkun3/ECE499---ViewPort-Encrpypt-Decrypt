@@ -49,7 +49,7 @@ step = round(z*0.4);
 AverageStep = 0;
 bias = 4;
 
-
+borderStep = round(rowIncrements*.3);
 
 
 %Find ranges for each pseudo pixel

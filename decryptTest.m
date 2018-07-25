@@ -43,10 +43,13 @@ t1=cputime;
 %Extract Data
 %imageOut3 = extract(image3,5,5,outThreshold);
 
-image3 = imread('TestPhotos/appleFS.jpg');
+%image3 = imread('TestPhotos/appleFS.jpg');
+image3 = imread('DecryptionTestImages/j5by5.png');
+
+
 %image3 = imread('output/1.png');
 
-image3 = crop(image3);
+%image3 = crop(image3);
 
 
 %figure('Name','Cropped Image');
@@ -56,14 +59,15 @@ image3 = crop(image3);
 %image3 = imread('output/1.png');
 %Find Image Green Threshold Value
 
-outThreshold = threshold(image3);
+%outThreshold = threshold(image3);
 %image3 = imsharpen(image3);
 %image3 = imgaussfilt(image3,0.7);
 
 %figure('Name','Encrypted Image')
 %imshow(image3);
 %Extract Data
-imageOut3 = extract(image3,8,8,outThreshold);
+%imageOut3 = extract_R(image3,5,5,outThreshold);
+imageOut3 = extract_B(image3,5,5);
 
 %Read Image-----------------------------
 %image3 = imread('TestPhotos/j5by5.jpg');
@@ -86,12 +90,12 @@ imageOut3 = extract(image3,8,8,outThreshold);
 
 
 %Normalize Data-----------------------------
-imageOut3 = normalization(imageOut3);
+%imageOut3 = normalization(imageOut3);
 
 %Decrypt Image-----------------------------
 
-dImage = decrypt(imageOut3,8,8);
-imwrite(dImage,'outputDecry/1D.png');
+%dImage = decrypt(imageOut3,5,5);
+%imwrite(dImage,'outputDecry/1D.png');
 decryptTestTime=(cputime-t1);
 
 %figure('Name','Decrypted Image')
