@@ -7,9 +7,9 @@ colIncrement = rowIncrement;
 
 centerBoxIncrement = round(rows/(2*rowCount));
 
-bias = 1;
+bias = 0;
 step = 1;
-variance = 40;
+variance = 10;
 
 %Currently configured for cube images only
 rowScan = cell(1,rowCount);
@@ -32,29 +32,29 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
        colCounter = 1;
     
        %First Left
-       sample = double(inputImage(i,1,2));
+       sample = double(inputImage(i,2,2));
        inc = 0;
        firstL = 1;
-       while abs(double(inputImage(i,1+inc,2))-sample) < variance 
+       while abs(double(inputImage(i,2+inc,2))-sample) < variance 
            %sample = inputImage(i,1+inc,2);
            inc = inc + 1;
            firstL = firstL + 1;
        end
        
-       firstL = firstL + 1;
+       firstL = firstL + 1 + bias;
        
        %Last Right
-       sample = double(inputImage(i,cols,2));
+       sample = double(inputImage(i,cols-1,2));
        dec = 0;
        lastR = cols;
        
-       while abs(double(inputImage(i,cols-dec,2))-sample) < variance 
+       while abs(double(inputImage(i,cols-1-dec,2))-sample) < variance 
            %sample = inputImage(i,1+inc,2);
            dec = dec + 1;
            lastR = lastR - 1;
        end
        
-       lastR = lastR - 1;
+       lastR = lastR - 1 - bias;
        
        scannedRow(rowCounter, colCounter) = firstL;
        colCounter = colCounter + 1;
@@ -73,7 +73,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
                X1 = X1 - 1;
            end
 
-           X1 = X1 - 2;
+           X1 = X1 - 2 - bias;
 
            %find right bound
            inc = step;
@@ -83,7 +83,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
                X2 = X2 + 1;
            end
 
-           X2 = X2 + 2;
+           X2 = X2 + 2 + bias;
 
            scannedRow(rowCounter,colCounter) = X1;
            colCounter = colCounter + 1;
@@ -104,26 +104,26 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
        rowCounter = 1;
     
        %First TOP
-       sample = double(inputImage(1,i,2));
+       sample = double(inputImage(1+1,i,2));
        inc = 0;
        firstL = 1;
-       while abs(double(inputImage(1+inc,i,2))-sample) < variance 
+       while abs(double(inputImage(1+1+inc,i,2))-sample) < variance 
            inc = inc + 1;
            firstL = firstL + 1;
        end
        
-       firstL = firstL + 1;
+       firstL = firstL + 1 + bias;
       
        %Last BOTTOM
-       sample = double(inputImage(rows,i,2));
+       sample = double(inputImage(rows-1,i,2));
        dec = 0;
        lastR = cols;
-       while abs(double(inputImage(rows-dec,i,2))-sample) < variance 
+       while abs(double(inputImage(rows-1-dec,i,2))-sample) < variance 
            dec = dec + 1;
            lastR = lastR - 1;
        end
        
-       lastR = lastR + 1;
+       lastR = lastR - 1 - bias;
        
        scannedCol(rowCounter,colCounter) = firstL;
        rowCounter = rowCounter + 1;
@@ -142,7 +142,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
                X1 = X1 - 1;
            end
 
-           X1 = X1 - 2;
+           X1 = X1 - 2 - bias;
 
            %Find BOTTOM bound
            inc = step;
@@ -152,7 +152,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
                X2 = X2 + 1;
            end
 
-           X2 = X2 + 2;
+           X2 = X2 + 2 + bias;
 
            scannedCol(rowCounter, colCounter) = X1;
            rowCounter = rowCounter + 1;
@@ -169,9 +169,9 @@ outCell = cell(1,(colCount*rowCount));
 cellCount = 1;
 %scannedCol = scannedCol';
 
-for i = 0:1:rowCount -1
+for i = 0:1:rowCount - 1
     
-    for j = 0:1:colCount -1
+    for j = 0:1:colCount - 1
         X1 = scannedRow((i+1),(j*2)+1);
         X2 = scannedRow((i+1),(j*2)+2);
         Y1 = scannedCol((i*2)+1,j+1);

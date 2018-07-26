@@ -44,22 +44,28 @@ t1=cputime;
 %imageOut3 = extract(image3,5,5,outThreshold);
 
 %image3 = imread('TestPhotos/appleFS.jpg');
-%image3 = imread('DecryptionTestImages/j5by5.png');
+image3 = imread('DecryptionTestImages/jay10by10.png');
 %good
-image3 = imread('TestPhotos/appleGrey8by8Crop.jpg');
+%image3 = imread('TestPhotos/appleGrey8by8Crop.jpg');
 %good
-image3 = imread('TestPhotos/apple8by8.jpg');
+%image3 = imread('TestPhotos/apple8by8.jpg');
 %good
-image3 = imread('TestPhotos/apple16by16.png');
+%image3 = imread('TestPhotos/apple16by16.png');
 %good
-image3 = imread('TestPhotos/apple32by321.png');
+%image3 = imread('TestPhotos/apple32by321.png');
 
 %good
 %variance 35 - 40
-image3 = imread('TestPhotos/railroad27by27.jpg');
+%image3 = imread('TestPhotos/railroad27by27.jpg');
 
-x = 27;
-y = 27;
+%good
+%image3 = imread('TestPhotos/apple32by321.png');
+
+%okay
+%image3 = imread('TestPhotos/apple8by8enc2.jpg');
+
+x = 10;
+y = 10;
 
 %image3 = imread('output/1.png');
 
