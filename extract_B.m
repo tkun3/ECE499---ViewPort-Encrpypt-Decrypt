@@ -9,7 +9,7 @@ centerBoxIncrement = round(rows/(2*rowCount));
 
 bias = 0;
 step = 1;
-variance = 10;
+variance = 5;
 
 %Currently configured for cube images only
 rowScan = cell(1,rowCount);

@@ -44,7 +44,8 @@ t1=cputime;
 %imageOut3 = extract(image3,5,5,outThreshold);
 
 %image3 = imread('TestPhotos/appleFS.jpg');
-image3 = imread('DecryptionTestImages/jay10by10.png');
+%good
+%image3 = imread('DecryptionTestImages/jay10by10.png');
 %good
 %image3 = imread('TestPhotos/appleGrey8by8Crop.jpg');
 %good
@@ -63,6 +64,10 @@ image3 = imread('DecryptionTestImages/jay10by10.png');
 
 %okay
 %image3 = imread('TestPhotos/apple8by8enc2.jpg');
+
+image3 = imread('DecryptionTestImages/jay10by10.png');
+
+%image3 = imread('output/1.png');
 
 x = 10;
 y = 10;
@@ -85,9 +90,18 @@ y = 10;
 
 %figure('Name','Encrypted Image')
 %imshow(image3);
-%Extract Data
-%imageOut3 = extract_R(image3,5,5,outThreshold);
-imageOut3 = extract_B(image3,x,y);
+%Extract Data------------------------------------------
+
+%imageOut3 = extract_B(image3,x,y);
+
+
+%outThreshold = threshold(image3);
+%imageOut3 = extract(image3,x,y,outThreshold);
+
+outThreshold = threshold_EUC(image3);
+imageOut3 = extract_EUC(image3,x,y,outThreshold);
+
+%-------------------------------------------------------
 
 %outThreshold = threshold(image3);
 %Extract Data

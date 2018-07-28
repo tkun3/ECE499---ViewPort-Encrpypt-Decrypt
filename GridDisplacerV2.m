@@ -12,7 +12,7 @@ tGridDisp=cputime;
 %image1 = imread('black1.png');
 %image1 = imread('DarkImages/bg1.jpg');
 %image1 = imread('jgs/jgs1.jpg');
-image1 = imread('image4.jpg');
+image1 = imread('image3.jpg');
 %image1 = imread('apple.jpg');
 %image1 = rgb2gray(image1);
 %paddedArray = padarray(image,[150 150],'both');
@@ -45,7 +45,7 @@ blockB = cell(x,y);
 %------Break image down into z*z blocks with x*y size matrix------
 
 %grid Size
-pad = 8;
+pad = 20;
 
 %Pad each pseudoPixel of the image
 
