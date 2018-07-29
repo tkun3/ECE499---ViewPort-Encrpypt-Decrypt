@@ -57,7 +57,7 @@ t1=cputime;
 
 %good
 %variance 35 - 40
-%image3 = imread('TestPhotos/railroad27by27.jpg');
+image3 = imread('TestPhotos/railroad27by27LOW.jpg');
 
 %good
 %image3 = imread('TestPhotos/apple32by321.png');
@@ -65,12 +65,14 @@ t1=cputime;
 %okay
 %image3 = imread('TestPhotos/apple8by8enc2.jpg');
 
-image3 = imread('DecryptionTestImages/jay10by10.png');
+%good
+%image3 = imread('DecryptionTestImages/jay10by10.png');
 
 %image3 = imread('output/1.png');
 
-x = 10;
-y = 10;
+x = 27;
+y = 27;
+variance = 15;
 
 %image3 = imread('output/1.png');
 
@@ -92,14 +94,14 @@ y = 10;
 %imshow(image3);
 %Extract Data------------------------------------------
 
-%imageOut3 = extract_B(image3,x,y);
+imageOut3 = extract_B(image3,x,y,variance);
 
 
 %outThreshold = threshold(image3);
 %imageOut3 = extract(image3,x,y,outThreshold);
 
-outThreshold = threshold_EUC(image3);
-imageOut3 = extract_EUC(image3,x,y,outThreshold);
+%outThreshold = threshold_EUC(image3);
+%imageOut3 = extract_EUC(image3,x,y,outThreshold);
 
 %-------------------------------------------------------
 

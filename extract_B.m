@@ -1,4 +1,4 @@
-function [outImage] = extract_B(inputImage, rowCount, colCount)
+function [outImage] = extract_B(inputImage, rowCount, colCount, variance)
 
 [rows cols depth] = size(inputImage);
 
@@ -7,9 +7,9 @@ colIncrement = rowIncrement;
 
 centerBoxIncrement = round(rows/(2*rowCount));
 
-bias = 0;
+bias = 2;
 step = 1;
-variance = 5;
+%variance = 36;
 
 %Currently configured for cube images only
 rowScan = cell(1,rowCount);
