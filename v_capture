@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#Screenshots a portion of the screen to use as an input for the decrypter
+
+#screencapture -c -x -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/input.jpg 
+
+screencapture -x -R450,95,400,400 -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/input.jpg 

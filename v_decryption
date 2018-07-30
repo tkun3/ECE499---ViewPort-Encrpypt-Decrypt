@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#-------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------
+#------------Runs Image through decryption processes within matlab
+#------------/Applications/MATLAB_R2017b.app/bin/matlab -nojvm -nodisplay -nosplash
+#------------matlab -r 'try myfunction(argument1,argument2); catch; end; quit'
+#------------EXAMPLE INPUT: /Applications/MATLAB_R2017b.app/bin/matlab -nodisplay -nosplash -r frameDecrypt('/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/TestPhotos/j5by5Low.jpg', 5, 5, 10, 1)
+#------------EXAMPLE SCRIP INPUT: /Applications/MATLAB_R2017b.app/bin/matlab -nodesktop -nojvm -nodisplay -nosplash -r "frameDecrypt($directory, $x, $y, $variance, $bias)"
+#-------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------
+
+MATSEND_PATH="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend"
+
+directory="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/TestPhotos/j5by5Low.jpg"
+x="5"
+y="5"
+variance="10"
+bias="1"
+
+iterations=1
+counter=1
+
+start=$SECONDS
+
+while [ $counter -le $iterations ]
+do
+	/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend "frameDecrypt('$directory', $x, $y, $variance, $bias)"
+	((counter++))
+done
+
+
+duration=$(( SECONDS - start ))
+
+echo "$iterations Iterations Completed in $duration Seconds"
