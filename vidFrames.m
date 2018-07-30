@@ -28,7 +28,7 @@ end %if
 
 % Delete contents of folder to avoid clutter
 % Comment/Uncomment as necessary
-filePattern = fullfile(outputFolder, '*.png'); %types: jpg, png
+filePattern = fullfile(outputFolder, '*.jpg'); %types: jpg, png
 fileList = dir(filePattern);
 if ~(cellfun(@isempty, {outputFolder}))
     for iDel = 1:length(fileList)
@@ -55,7 +55,6 @@ end %if
 %     imwrite(frame, fullfile(outputFolder, outputFileName));
 % end
 % %toc
-
 
 %% Get a sequence of frames within specified period
 vObject.CurrentTime = 0; %time to start
