@@ -1,0 +1,43 @@
+<html>
+	
+	<head>
+		<link rel="stylesheet" href="./css/bs/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/home.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand">
+				<h5 class="text-white">Decrypted Image Display</h5>
+			</a>
+		</nav>
+		<div class="container imageDisplay">
+			<div clas="row">
+				<div class="col main text-center">
+					<img id="mainImage" src="./prototype/output/1.jpg">
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+	<script>
+
+
+		async function update(){
+			mainImage = document.getElementById("mainImage");
+			while (1){
+				mainImage.src =' ./prototype/output/1.jpg?rand=' + Math.random();
+				await sleep(20);
+				console.log("Test");
+			}
+		}
+
+		function sleep(ms) {
+  			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		update();
+
+	</script>
+
+</html>

@@ -1,0 +1,26 @@
+body{
+
+	background-color: #343a47;
+
+}
+
+.text-white{
+	border: 1px solid white;
+	padding:8px;
+	border-radius:3px;
+}
+
+.navbar{
+	border-bottom: 1px solid white;
+}
+
+.imageDisplay{
+	margin-top:10px;
+	//border: 1px solid white;
+	height: 500px;
+	border-radius:5px;
+}
+
+.main{
+	width:100%;
+}

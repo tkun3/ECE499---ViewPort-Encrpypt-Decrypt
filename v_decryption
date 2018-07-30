@@ -18,7 +18,7 @@ y="5"
 variance="10"
 bias="1"
 
-iterations=1
+iterations=1000
 counter=1
 
 start=$SECONDS
@@ -27,6 +27,8 @@ while [ $counter -le $iterations ]
 do
 	/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend "frameDecrypt('$directory', $x, $y, $variance, $bias)"
 	((counter++))
+
+
 done
 
 
