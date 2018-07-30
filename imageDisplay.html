@@ -7,13 +7,18 @@
 	<body>
 		<nav class="navbar navbar-dark bg-dark">
 			<a class="navbar-brand">
-				<h5 class="text-white">Decrypted Image Display</h5>
+				<h5 class="text-white logo">T & J</h5>
+				<a class="text-white">Real Time Decryption Demo</a>
 			</a>
 		</nav>
 		<div class="container imageDisplay">
 			<div clas="row">
 				<div class="col main text-center">
+					<h2>Decrypted Image Output</h2>
 					<img id="mainImage" src="./prototype/output/1.jpg">
+					<h2>Decrypted Image Output</h2>
+					<br>
+					<h2>Group: 24 - Takuma and James</h2>
 				</div>
 			</div>
 		</div>
@@ -27,7 +32,7 @@
 			mainImage = document.getElementById("mainImage");
 			while (1){
 				mainImage.src =' ./prototype/output/1.jpg?rand=' + Math.random();
-				await sleep(20);
+				await sleep(100);
 				console.log("Test");
 			}
 		}

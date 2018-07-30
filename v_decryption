@@ -12,6 +12,7 @@
 
 MATSEND_PATH="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend"
 
+#input Directory
 directory="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/TestPhotos/j5by5Low.jpg"
 x="5"
 y="5"
@@ -26,6 +27,7 @@ start=$SECONDS
 while [ $counter -le $iterations ]
 do
 	/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend "frameDecrypt('$directory', $x, $y, $variance, $bias)"
+	sleep 0.05
 	((counter++))
 
 
