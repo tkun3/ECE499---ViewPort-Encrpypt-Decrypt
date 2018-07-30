@@ -8,8 +8,8 @@ close all;
 
 % Get desired video path
 % v = 'VideoFileName.type';
-% Test videos: rhinos.avi, traffic.avi, xylophone.mp4
-vObject = 'NOTLDMP4.mp4'; %Video File name
+% Example: rhinos.avi, traffic.avi, xylophone.mp4
+vObject = 'xylophone.mp4'; %Video File name
 folder = fileparts(which(vObject));
 fullPath = fullfile(folder, vObject);
 
@@ -20,23 +20,32 @@ vFrameRate = vObject.FrameRate; %frames per second
 vHeight = vObject.Height; %pixels
 vWidth = vObject.Width; %pixels
 
-% Create directory to save to
-currFolder = pwd;
-outputFolder = sprintf('%s/VideoFrames', currFolder);
-if ~exist(outputFolder, 'dir')
-    mkdir(outputFolder);
-end %if
-
 % Specify image type: .jpg, .png
 type = '.jpg';
+typeWildcard = sprintf('*%s',type);
+% Specify video type: .avi, .mp4, .wmv
+vType = '.avi';
+
+% Specify time to start video at
+tStart = 0;
+% Specify length of time to extract
+% tDuration = 10;
+tDuration = vDuration;
+
+% Create directory for frames to save to
+currFolder = pwd;
+frameOutputFolder = sprintf('%s/VideoFrames', currFolder);
+if ~exist(frameOutputFolder, 'dir')
+    mkdir(frameOutputFolder);
+end %if
 
 % Delete contents of folder to avoid clutter
 % Comment/Uncomment as necessary
-filePattern = fullfile(outputFolder, '*.jpg'); %types: jpg, png
+filePattern = fullfile(frameOutputFolder, typeWildcard); %types: jpg, png
 fileList = dir(filePattern);
-if ~(cellfun(@isempty, {outputFolder}))
+if ~(cellfun(@isempty, {frameOutputFolder}))
     for iDel = 1:length(fileList)
-        delFileName = fullfile(outputFolder, fileList(iDel).name);
+        delFileName = fullfile(frameOutputFolder, fileList(iDel).name);
         delete(delFileName);
     end %for
 end %if
@@ -61,32 +70,32 @@ end %if
 % %toc
 
 %% Get a sequence of frames within specified period
-vObject.CurrentTime = 30; %time to start
+vObject.CurrentTime = tStart; %time to start
 %tEnd = vDuration; %time to end
-tEnd = vObject.CurrentTime + 20; % collect 2 minutes of frames specified start
+tEnd = vObject.CurrentTime + tDuration; % collect 2 minutes of frames specified start
 %tic
 while vObject.CurrentTime < tEnd
     thisFrame.cdata = readFrame(vObject);
     outputFileName = sprintf('Frame Time %0.2f%s', vObject.CurrentTime, type); %types: jpg, png
-    imwrite(thisFrame.cdata, fullfile(outputFolder, outputFileName));
+    imwrite(thisFrame.cdata, fullfile(frameOutputFolder, outputFileName));
 end %while
 %toc
 
 %% Encrypt the extracted frames
 % GridDisplacerV2.m
 % Written by Takuma Pimlott
+% Script by James Wong
 
 % Load frames to be encrypted
-frameFolder = outputFolder;
-frameWildcard = sprintf('*%s', type);
-frameBaseName = fullfile(frameFolder, frameWildcard);
+frameFolder = frameOutputFolder;
+frameBaseName = fullfile(frameFolder, typeWildcard);
 frameList = dir(frameBaseName);
-frameListLength = length(fileList);
+frameListLength = length(frameList);
 
 % Create list of frame image names
 encryptedNameList = cell(frameListLength,1);
 for i = 1:frameListLength
-    frameImageName = fullfile(frameFolder, fileList(i).name);
+    frameImageName = fullfile(frameFolder, frameList(i).name);
     encryptedNameList{i} = frameImageName;
 end %for
 
@@ -98,7 +107,7 @@ end %if
 
 % Delete contents of encrypted frames folder
 % Comment/Uncomment as necessary
-filePattern = fullfile(encOutputFolder, '*.jpg'); %types: jpg, png
+filePattern = fullfile(encOutputFolder, typeWildcard); %types: jpg, png
 fileList = dir(filePattern);
 if ~(cellfun(@isempty, {encOutputFolder}))
     for iDel = 1:length(fileList)
@@ -111,27 +120,26 @@ end %if
 for j = 1:frameListLength
     inputImage = imread(encryptedNameList{j});
     encImage = gridDisplacer_func(inputImage);
-    encOutputName = sprintf('Encrypted Frame %d.jpg', j);
+    encOutputName = sprintf('Encrypted Frame %d%s', j, type);
     imwrite(encImage, fullfile(encOutputFolder, encOutputName));
 end %for
 %% Combine encrypted frames as a video
 % Create directory to save new video to
 currFolder = pwd;
-outputFolder = sprintf('%s/EncryptedVid', currFolder);
-if ~exist(outputFolder, 'dir')
-    mkdir(outputFolder);
+vidOutputFolder = sprintf('%s/EncryptedVid', currFolder);
+if ~exist(vidOutputFolder, 'dir')
+    mkdir(vidOutputFolder);
 end %if
 
 % Create VideoWriter object to write to
-vidFileName = fullfile(outputFolder, 'NewVid.avi');
+vidName = sprintf('video%s', vType);
+vidFileName = fullfile(vidOutputFolder, vidName);
 vidObj = VideoWriter(vidFileName); %name of video file
 vidObj.FrameRate = vFrameRate;
 open(vidObj);
 
-% Delete previous
-
 % Create array of encrypted frame names
-encBaseFileName = fullfile(encOutputFolder, frameWildcard);
+encBaseFileName = fullfile(encOutputFolder, typeWildcard);
 encryptedList = dir(encBaseFileName);
 % Sort array in natural order (ascending)
 encryptedListSorted = natsortfiles({encryptedList.name});
@@ -153,10 +161,7 @@ allColorMaps = cell(encryptedListLength, 1);
 allColorMaps(:) = {zeros(256, 3)};
 % Combine to make array of structures
 encryptedVid = struct('cdata', allFrames, 'colormap', allColorMaps);
-% encImageName = encryptedNameList{1};
-% thisFrame = imread(encImageName);
-% asdf = im2frame(thisFrame);
-% encryptedVid(1) = im2frame(thisFrame);
+% Iterate through frames in folder and combine as a video
 for k = 1:encryptedListLength
     encImageName = encryptedNameList{k};
     % Read encrypted image from disk
@@ -167,7 +172,7 @@ for k = 1:encryptedListLength
     writeVideo(vidObj, thisFrame);
 end %for
 
-close(vidObj);
+close(vidObj); %close video object
 
 % axis off;
 % title('Encrypted Video from Disk');
