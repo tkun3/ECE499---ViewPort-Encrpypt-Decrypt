@@ -3,10 +3,6 @@
 #Screenshots a portion of the screen to use as an input for the decrypter
 
 #screencapture -c -x -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/input.jpg 
-#Works for up to 10 by 10 well
-#screencapture -x -R450,95,300,300 -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/1.jpg 
-#For 40 x 40 image
-#screencapture -x -R450,95,600,600 -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/1.jpg 
 
 counter=0;
 iterations=1000;
@@ -15,7 +11,7 @@ start=$SECONDS;
 
 while [ $counter -le $iterations ]
 do
-	screencapture -x -R450,95,400,400 -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/1.jpg 
+	screencapture -x -R450,95,400,400 -t jpg /Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/output/1.jpg 
 	(( counter++ ))
 
 done

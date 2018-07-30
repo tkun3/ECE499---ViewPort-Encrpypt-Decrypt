@@ -1,4 +1,4 @@
-function [] = frameDecrypt(directory,x,y,variance,bias)
+function [outTime] = frameDecrypt(directory,x,y,variance,bias)
 
 t1=cputime;
 %imageRead
@@ -22,7 +22,7 @@ outDirectory = 'prototype/output/1.jpg';
 imwrite(dImage,outDirectory);
 %imwrite(image2,outDirectory2);
 
-%outTime=(cputime-t1);
+outTime=(cputime-t1);
 
 end
 
