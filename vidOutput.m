@@ -9,7 +9,7 @@ close all;
 % Get desired video path
 % v = 'VideoFileName.type';
 % Example: rhinos.avi, traffic.avi, xylophone.mp4
-vObject = 'xylophone.mp4'; %Video File name
+vObject = 'NOTLDMP4.mp4'; %Video File name
 folder = fileparts(which(vObject));
 fullPath = fullfile(folder, vObject);
 
@@ -27,10 +27,10 @@ typeWildcard = sprintf('*%s',type);
 vType = '.avi';
 
 % Specify time to start video at
-tStart = 0;
+tStart = 30;
 % Specify length of time to extract
-% tDuration = 10;
-tDuration = vDuration;
+tDuration = 300;
+% tDuration = vDuration;
 
 % Create directory for frames to save to
 currFolder = pwd;
@@ -90,6 +90,9 @@ end %while
 frameFolder = frameOutputFolder;
 frameBaseName = fullfile(frameFolder, typeWildcard);
 frameList = dir(frameBaseName);
+% Sort array in natural order (ascending)
+frameListSorted = natsortfiles({frameList.name});
+frameListSorted = transpose(frameListSorted);
 frameListLength = length(frameList);
 
 % Create list of frame image names

@@ -12,8 +12,8 @@ function [encImage] = gridDisplacer_func(inputImage)
 % Night of the Living Dead (400x400)
 % z = 80; % 5x5
 % z = 40; % 10x10
-% z = 20; % 20x20
-z = 10; % 40x40
+z = 20; % 20x20
+% z = 10; % 40x40
 
 [rows columns depth] = size(inputImage);
 
@@ -32,7 +32,8 @@ blockB = cell(x,y);
 
 %grid Size
 % pad = 10;
-pad = 5;
+% pad = 5;
+pad = 2;
 
 %Pad each pseudoPixel of the image
 
@@ -109,6 +110,6 @@ encryptedImagePre = cat(3, blockRe, blockGe, blockBe);
 encryptedImagePost = cell2mat(encryptedImagePre);
 
 encImage = encryptedImagePost;
-%imwrite(encryptedImagePost,'output/1.png');
+
 end
 
