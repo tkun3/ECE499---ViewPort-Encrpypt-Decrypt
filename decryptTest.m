@@ -57,7 +57,7 @@ t1=cputime;
 
 %good
 %variance 35 - 40
-image3 = imread('TestPhotos/railroad27by27LOW.jpg');
+%image3 = imread('TestPhotos/railroad27by27LOW.jpg');
 
 %good
 %image3 = imread('TestPhotos/apple32by321.png');
@@ -70,9 +70,11 @@ image3 = imread('TestPhotos/railroad27by27LOW.jpg');
 
 %image3 = imread('output/1.png');
 
-x = 27;
-y = 27;
+image3 = imread('~/Desktop/TestCases/TestImages/40by40.jpg');
+x = 40;
+y = 40;
 variance = 15;
+bias = 0;
 
 %image3 = imread('output/1.png');
 
@@ -94,7 +96,7 @@ variance = 15;
 %imshow(image3);
 %Extract Data------------------------------------------
 
-imageOut3 = extract_B(image3,x,y,variance);
+imageOut3 = extract_B(image3,x,y,variance,bias);
 
 
 %outThreshold = threshold(image3);
@@ -135,7 +137,7 @@ imageOut3 = normalization(imageOut3);
 %Decrypt Image-----------------------------
 
 dImage = decrypt(imageOut3,x,y);
-imwrite(dImage,'outputDecry/1D.png');
+imwrite(dImage,'outputDecry/1D.jpg');
 decryptTestTime=(cputime-t1);
 
 %figure('Name','Decrypted Image')

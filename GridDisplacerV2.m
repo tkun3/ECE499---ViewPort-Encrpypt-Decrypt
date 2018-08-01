@@ -23,7 +23,7 @@ image1 = imread('image3.jpg');
 %z = 120;
 %z = 100;
 %z = 105;
-z = 40;
+z = 5;
 
 
 %of horizontal cubes
@@ -45,7 +45,7 @@ blockB = cell(x,y);
 %------Break image down into z*z blocks with x*y size matrix------
 
 %grid Size
-pad = 20;
+pad = 4;
 
 %Pad each pseudoPixel of the image
 

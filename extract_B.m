@@ -29,7 +29,7 @@ scannedCol = zeros(rowCount*2,colCount);
 
 rowCounter = 1;
 
-for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
+for i = centerBoxIncrement:(centerBoxIncrement*2):rows-1
        
        
        colCounter = 1;
@@ -64,7 +64,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
        
        scannedRow(rowCounter, colCount*2) = lastR;
 
-        for j = colIncrement:colIncrement:cols-10
+        for j = colIncrement:colIncrement:cols-1
 
 
            %find left bound
@@ -77,7 +77,12 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
            end
 
            X1 = X1 - 2 - bias;
-
+            
+           if (X1 == 0)
+               
+              printf("SHIT");
+              
+           end
            %find right bound
            inc = step;
            X2 = j;
@@ -102,7 +107,7 @@ end
 %Grid column (Top and Bottom)------------------------------
 
 colCounter = 1;
-for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
+for i = centerBoxIncrement:(centerBoxIncrement*2):rows-1
     
        rowCounter = 1;
     
@@ -133,7 +138,7 @@ for i = centerBoxIncrement:(centerBoxIncrement*2):rows-10
        
        scannedCol(rowCount*2,colCounter) = lastR;
 
-        for j = rowIncrement:rowIncrement:rows-10
+        for j = rowIncrement:rowIncrement:rows-1
 
 
            %Find TOP bound

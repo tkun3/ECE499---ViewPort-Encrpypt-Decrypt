@@ -14,12 +14,12 @@ MATSEND_PATH="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/matSend"
 
 #input Directory
 directory="/Users/Takuma/Desktop/ECE499/ECE499_V_Encryption/prototype/input/1.jpg"
-x="40"
-y="40"
-variance="20"
-bias="2"
+x="5"
+y="5"
+variance="15"
+bias="3"
 
-iterations=1000
+iterations=100
 counter=1
 
 start=$SECONDS
